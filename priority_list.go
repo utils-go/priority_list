@@ -33,16 +33,17 @@ func (p *PriorityList[T]) Push(priority int, item T) {
 		p.list = append(p.list, l)
 		return
 	}
-	index := 0
+	index := len(p.list)
 	for i := 0; i < len(p.list); i++ {
 		if l.priority >= p.list[i].priority {
 			index = i
+			break
 		}
 	}
 	//插入到i之前
 	oldList := p.list
 	left := oldList[0:index]
-	right := oldList[index+1:]
+	right := oldList[index:]
 	p.list = make([]priorityItem[T], 0)
 	p.list = append(p.list, left...)
 	p.list = append(p.list, l)
